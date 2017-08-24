@@ -20,6 +20,7 @@ class ValueCard extends Component {
       cost
     } = this.state;
 
+
     this.setState({
       value,
       cost: cost + nextCost
@@ -44,7 +45,7 @@ class ValueCard extends Component {
                   <span>{PropName.title}</span>
                 </Col>
                 <Col span={12}>
-                  <CountValue Value={value} Cost={cost} onCallBack={this.callBackCountValue} />
+                  <CountValue PropName={PropName.propName} />
                 </Col>
               </Row>
             </Col>
@@ -61,4 +62,10 @@ class ValueCard extends Component {
   }
 }
 
+// function mapStateToProps(store) {
+//   const propValues = store.propValues;
+//   return { propValues };
+// }
+
+// export default connect(mapStateToProps)(ValueCard);
 export default ValueCard;

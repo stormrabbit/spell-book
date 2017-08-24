@@ -7,6 +7,8 @@ const app = dva({
   history: browserHistory
 });
 
+app.model(require("./models/propValues"));
+
 // 2. Plugins
 // app.use({});
 

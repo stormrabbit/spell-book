@@ -5,7 +5,8 @@ import React, {
 import { Tabs } from 'antd';
 const TabPane = Tabs.TabPane;
 import ValueCard from './sub/ValueCard';
-import {PROPS} from './PropConfig';
+import { PROPS } from './PropConfig';
+import { connect } from 'dva';
 class PropNames extends Component {
   static propTypes = {
     className: PropTypes.string,
@@ -15,18 +16,27 @@ class PropNames extends Component {
     super(props);
   }
 
-  callback = (key) => {
-    console.log(key);
-  }
+
   render() {
     // console.log(PROPS);
+    const { totalPoints } = this.props;
     return (
-      <div style={{textAlign: 'center'}}>
-        <ValueCard PropName={PROPS.str}/>
+      <div style={{ textAlign: 'center' }}>
+        <h1>{totalPoints}点</h1>
+        {
+          Object.keys(PROPS).map((keys, index) => {
+            return <ValueCard key={index} PropName={PROPS[keys]} />;
+          })
+        }
       </div>
 
     );
   }
 }
 
-export default PropNames;
+function mapStateToProps(store) {
+  const { propValues: { total: totalPoints } } = store;
+  return { totalPoints };
+}
+
+export default connect(mapStateToProps)(PropNames);
